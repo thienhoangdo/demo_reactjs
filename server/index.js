@@ -1,7 +1,29 @@
 import express from "express";
 import bodyParser from "body-parser";
 import cors from 'cors'
+import mongodb, { MongoClient } from 'mongodb';
+
 const app = express();
+
+
+
+let url = 'mongodb://localhost:27017/';
+
+var mongo = new MongoClient(url, { useNewUrlParser : true});
+
+mongo.connect(function (err, db) {
+    if (err) {
+      console.log('Unable to connect to the mongoDB server. Error:', err);
+    } else {
+      //HURRAY!! We are connected. :)
+      console.log('Connection established to', url);
+  
+      // do some work here with the database.
+  
+      //Close connection
+      db.close();
+    }
+  });
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -21,4 +43,6 @@ app.post("/", function(req, res){
     
 });
 
-app.listen(port);
+app.listen(port, function () {
+    console.log("tesst gi do");
+});
