@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react' // nạp thư viện react
 import ReactDOM from 'react-dom' // nạp thư viện react-dom
 
-import store from './app/store_form';
+import store from './app/store';
 
 import Layout from './Layout';
 import {BrowserRouter,Routes,Route,useLocation } from "react-router-dom";

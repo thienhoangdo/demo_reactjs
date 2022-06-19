@@ -80,7 +80,7 @@ function Form(){
             }
         })
         setDistrictOps(_districtOption);
-        dispatch(setValueCity());
+        dispatch(setValueCity(valuecity));
     }
 
     function onChangeDistrict(e){
@@ -94,7 +94,7 @@ function Form(){
             }
         })
         setWardOps(_wardOption);
-        dispatch(setValueDistrict());
+        dispatch(setValueDistrict(valuedistrict));
         
     }
     return(
