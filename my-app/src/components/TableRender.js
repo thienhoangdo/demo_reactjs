@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState }  from "react";
 import styled from 'styled-components'
 import { useTable } from 'react-table'
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 const Styles = styled.div`
   padding: 1rem;
 
@@ -34,31 +36,17 @@ const Styles = styled.div`
 
 function TableRender(){
     const navigate = useNavigate();
-
-    const data = [{
-        name: 'Nguyen Van A',
-        age: 26,
-      }, {
-        name: 'Dao Thi B',
-        age: 22,
-  
-      }, {
-        name: 'Tran Duc C',
-        age: 25,
-      
-      }, {
-        name: 'Le Tien N',
-        age: 27,
-       
-      }, {
-        name: 'Pham Hoang M',
-        age: 26,
-       
-      }, {
-        name: 'Duong Van L',
-        age: 23,
-       
-      }];
+    const [data, setData] = useState([]);
+      function getEvents() {
+        axios.get("http://localhost:5000/")
+            .then(response => response.data)
+            .then((data) => {
+                setData(data)
+            });
+      }
+      useEffect(()=>{
+          getEvents();
+      },[])
       
       const columns = [
         {

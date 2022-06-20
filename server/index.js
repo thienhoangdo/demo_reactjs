@@ -9,7 +9,7 @@ const app = express();
 
 
 
-let url = 'mongodb://localhost:27017/admin';
+let url = 'mongodb://localhost:27017/user_login';
 
 // var mongo = new MongoClient(url, { useNewUrlParser : true});
 
@@ -47,12 +47,7 @@ const customer = new Schema({
 
 const MyModel = mongoose.model('customer', customer);
 
-MyModel.find({}).then(function(data){
-  console.log('data',data)
-})
-.catch(function(err){
-  console.log('loi',err);
-})
+
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -63,8 +58,13 @@ app.set("views", "./view");
 app.set("view engine","ejs");
 
 app.get("/", function(req, res){
-    
-    res.render('trangchu');
+    MyModel.find({}).then(function(data){
+      console.log('data',data);
+      res.json(data);
+    })
+    .catch(function(err){
+      console.log('loi',err);
+    })
 });
 
 app.post("/", function(req, res){
@@ -73,5 +73,5 @@ app.post("/", function(req, res){
 });
 
 app.listen(port, function () {
-    console.log("tesst gi do");
+    console.log("tesst");
 });
