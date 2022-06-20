@@ -9,25 +9,8 @@ const app = express();
 
 
 
-let url = 'mongodb://localhost:27017/user_login';
+let url = 'mongodb://localhost:27017/admin';
 
-// var mongo = new MongoClient(url, { useNewUrlParser : true});
-
-// mongo.connect(function (err, db) {
-//     if (err) {
-//       console.log('Unable to connect to the mongoDB server. Error:', err);
-//     } else {
-//       //HURRAY!! We are connected. :)
-//       console.log('Connection established to', url);
-  
-//       // do some work here with the database.
-  
-//       //Close connection
-//       db.close();
-//     }
-//   });
-
-// const mongoose = require('mongoose');
 main().catch(err => console.log(err));
 
 async function main() {
@@ -43,7 +26,7 @@ const customer = new Schema({
   age: String,
 },{
   collection: "customer"
-});
+},{ versionKey: false });
 
 const MyModel = mongoose.model('customer', customer);
 
@@ -67,10 +50,48 @@ app.get("/", function(req, res){
     })
 });
 
-app.post("/", function(req, res){
-    console.log(req.body);
-    
+app.post("/create", function(req, res){
+  console.log(req.body)
+  MyModel.create({
+    name : req.body.name,
+    age : req.body.age
+  }).then(function(req){
+    console.log('data',req.body);
+  
+  })
+  .catch(function(err){
+    console.log('loi',err);
+  })
 });
+
+app.post("/delete", function(req, res){
+  console.log(req.body._id);
+  let id = req.body._id;
+  MyModel.deleteOne({
+    _id : id
+  }).then(function(req){
+    console.log('data',req.body);
+  
+  })
+  .catch(function(err){
+    console.log('loi',err);
+  })
+});
+
+
+// app.post("/update", function(req, res){
+//   console.log(req.body._id);
+//   let id = req.body._id;
+//   MyModel.deleteOne({
+//     _id : id
+//   }).then(function(req){
+//     console.log('data',req.body);
+   
+//   })
+//   .catch(function(err){
+//     console.log('loi',err);
+//   })
+// });
 
 app.listen(port, function () {
     console.log("tesst");

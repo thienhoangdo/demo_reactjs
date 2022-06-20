@@ -10,7 +10,7 @@ function Form(){
     // useEffect(() => {
     //     console.log(name);
     // },[name, age, phone ,gender ,valueCity ,valueDistrict ,valueWard]);
-    
+    console.log(name);
     const dispatch = useDispatch();
     const gt = [{value:"nam",label:"Nam"},{value:"nữ",label:"Nữ"},{value:"khác",label:"Khác"}]
     const city = [{ 
@@ -62,7 +62,7 @@ function Form(){
         };
 
         console.log(data);
-        axios.post("http://localhost:5000/",data)
+        axios.post("http://localhost:5000/create",data)
         .then(d => {
             console.log(d);
         })
@@ -107,8 +107,9 @@ function Form(){
             <h2 className="form-signin-heading">Nhập thông tin cho vui</h2>
             <div class="form-group">
                 <InputForm 
+                value = {name}
                 type="text" 
-                placeholder="Họ và Tên"
+                placeholder= "Họ và Tên"
                 textlable = "Họ và Tên"
                 onChange = {e => {dispatch(setName(e.target.value));console.log(e.target.value)}}
                 />
@@ -117,6 +118,7 @@ function Form(){
             
                 <InputForm 
                 type="number" 
+                value = {age}
                 placeholder="Tuổi"
                 textlable = "nhập thông tin Tuổi"
                 onChange = {e => {dispatch(setAge(e.target.value))}}

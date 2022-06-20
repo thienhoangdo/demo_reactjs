@@ -18,7 +18,7 @@ function Layout(props){
                 <Route path="/table" element={<TableRender />} />
                 <Route path="/reports" element={<Login />} />
                 <Route path="/products" element={<Form />} />
-                <Route path="/customer-detail" exact element={<Form />} />
+                <Route path="/customer-detail/:id" exact element={<Form />} />
             </Routes>
         );
     
